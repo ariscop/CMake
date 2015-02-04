@@ -14,6 +14,7 @@ endif()
 
 # Compute the full version string.
 set(CMake_VERSION ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}.${CMake_VERSION_PATCH})
+set(CMake_VERSION_SOURCE "ReactOS")
 if(CMake_VERSION_SOURCE)
   set(CMake_VERSION_SUFFIX "${CMake_VERSION_SOURCE}")
 elseif(CMake_VERSION_RC)
