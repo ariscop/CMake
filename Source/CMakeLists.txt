@@ -496,6 +496,9 @@ set(SRCS ${SRCS}
 if(WIN32 AND NOT CYGWIN)
   set_source_files_properties(cmcldeps.cxx PROPERTIES COMPILE_DEFINITIONS _WIN32_WINNT=0x0501)
   add_executable(cmcldeps cmcldeps.cxx)
+  if(MSVC)
+    set_property(TARGET cmcldeps APPEND_STRING PROPERTY LINK_FLAGS "/SUBSYSTEM:CONSOLE,5.01")
+  endif()
   target_link_libraries(cmcldeps CMakeLib)
   install(TARGETS cmcldeps DESTINATION bin)
 endif()
@@ -673,14 +676,23 @@ endif()
 
 # Build CMake executable
 add_executable(cmake cmakemain.cxx cmcmd.cxx cmcmd.h)
+if(MSVC)
+  set_property(TARGET cmake APPEND_STRING PROPERTY LINK_FLAGS "/SUBSYSTEM:CONSOLE,5.01")
+endif()
 target_link_libraries(cmake CMakeLib)
 
 # Build CTest executable
 add_executable(ctest ctest.cxx)
+if(MSVC)
+  set_property(TARGET ctest APPEND_STRING PROPERTY LINK_FLAGS "/SUBSYSTEM:CONSOLE,5.01")
+endif()
 target_link_libraries(ctest CTestLib)
 
 # Build CPack executable
 add_executable(cpack CPack/cpack.cxx)
+if(MSVC)
+  set_property(TARGET cpack APPEND_STRING PROPERTY LINK_FLAGS "/SUBSYSTEM:CONSOLE,5.01")
+endif()
 target_link_libraries(cpack CPackLib)
 
 # Curses GUI
