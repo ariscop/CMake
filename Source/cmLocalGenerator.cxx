@@ -875,13 +875,6 @@ cmLocalGenerator::ExpandRuleVariable(std::string const& variable,
       return replaceValues.ObjectDir;
       }
     }
-  if(replaceValues.ObjectFileDir)
-    {
-    if(variable == "OBJECT_FILE_DIR")
-      {
-      return replaceValues.ObjectFileDir;
-      }
-    }
   if(replaceValues.Objects)
     {
     if(variable == "OBJECTS")

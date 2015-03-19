@@ -271,7 +271,6 @@ public:
     const char* Output;
     const char* Object;
     const char* ObjectDir;
-    const char* ObjectFileDir;
     const char* Flags;
     const char* ObjectsQuoted;
     const char* SONameFlag;
