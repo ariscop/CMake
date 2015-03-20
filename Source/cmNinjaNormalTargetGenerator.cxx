@@ -502,7 +502,7 @@ void cmNinjaNormalTargetGenerator::WriteLinkStatement()
     localGen.AddArchitectureFlags(t, &genTarget, TargetLinkLanguage, cfgName);
     vars["FLAGS"] = t;
     }
-  else
+  else if (targetType == cmTarget::SHARED_LIBRARY || targetType == cmTarget::MODULE_LIBRARY)
     {
     std::string t = vars["ARCH_FLAGS"];
     localGen.AddArchitectureFlags(t, &genTarget, TargetLinkLanguage, cfgName);
