@@ -706,7 +706,9 @@ void cmNinjaNormalTargetGenerator::WriteLinkStatement()
     }
 
   // Add aliases for the file name and the target name.
+#if 0 /* ReactOS */
   globalGen.AddTargetAlias(this->TargetNameOut, &target);
+#endif
   globalGen.AddTargetAlias(this->GetTargetName(), &target);
 }
 
