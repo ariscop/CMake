@@ -375,8 +375,11 @@ std::string cmNinjaTargetGenerator::GetTargetName() const
 bool cmNinjaTargetGenerator::SetMsvcTargetPdbVariable(cmNinjaVars& vars) const
 {
   cmMakefile* mf = this->GetMakefile();
-  if (mf->GetDefinition("MSVC_C_ARCHITECTURE_ID") ||
-      mf->GetDefinition("MSVC_CXX_ARCHITECTURE_ID"))
+  const std::string cId = mf->GetDefinition("CMAKE_C_COMPILER_ID")
+      ? mf->GetSafeDefinition("CMAKE_C_COMPILER_ID")
+      : mf->GetSafeDefinition("CMAKE_CXX_COMPILER_ID");
+
+  if (cId == "MSVC")
     {
     std::string pdbPath;
     std::string compilePdbPath;
