@@ -251,6 +251,7 @@ public:
   bool HasRule(const std::string& name);
 
   void AddCustomCommandRule();
+  void AddNoopCommandRule();
   void AddMacOSXContentRule();
 
   bool HasCustomCommandOutput(const std::string &output) {

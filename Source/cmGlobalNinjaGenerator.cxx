@@ -246,6 +246,27 @@ void cmGlobalNinjaGenerator::AddCustomCommandRule()
                 /*generator*/ false);
 }
 
+void cmGlobalNinjaGenerator::AddNoopCommandRule()
+{
+  cmLocalGenerator *lg = this->LocalGenerators[0];
+  cmMakefile* mfRoot = lg->GetMakefile();
+
+  std::string cmd = lg->ConvertToOutputFormat(mfRoot->GetRequiredDefinition("CMAKE_COMMAND"),
+                                              cmLocalGenerator::SHELL);
+  cmd += " -E echo_append";
+
+  this->AddRule("NOOP_COMMAND",
+                cmd,
+                "NOOP",
+                "Rule for running noop command.",
+                /*depfile*/ "",
+                /*deptype*/ "",
+                /*rspfile*/ "",
+                /*rspcontent*/ "",
+                /*restat*/ "1",
+                /*generator*/ false);
+}
+
 void
 cmGlobalNinjaGenerator::WriteCustomCommandBuild(const std::string& command,
                                                 const std::string& description,
@@ -263,6 +284,7 @@ cmGlobalNinjaGenerator::WriteCustomCommandBuild(const std::string& command,
 #endif
 
   this->AddCustomCommandRule();
+  this->AddNoopCommandRule();
 
   cmNinjaVars vars;
   vars["COMMAND"] = cmd;

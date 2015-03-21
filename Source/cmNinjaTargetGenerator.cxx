@@ -791,10 +791,14 @@ cmNinjaTargetGenerator
     cmSystemTools::ExpandListArgument(objectOutputs, outputList);
     std::transform(outputList.begin(), outputList.end(), outputList.begin(),
                    MapToNinjaPath());
-    this->GetGlobalGenerator()->WritePhonyBuild(this->GetBuildFileStream(),
-                                                "Additional output files.",
-                                                outputList,
-                                                outputs);
+    this->GetGlobalGenerator()->WriteBuild(this->GetBuildFileStream(),
+                                           "Additional output files.",
+                                           "NOOP_COMMAND",
+                                           outputList,
+                                           outputs,
+                                           cmNinjaDeps(),
+                                           cmNinjaDeps(),
+                                           cmNinjaVars());
   }
 
   if(const char* objectLocationStr = source->GetProperty("OBJECT_LOCATION")) {
