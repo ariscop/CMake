@@ -124,17 +124,17 @@ void cmNinjaTargetGenerator::AddFeatureFlags(std::string& flags,
 static void EscapeTargetForVariable(std::string& name)
 {
   // '.' is not allowed in variable names, so escape them.
-  cmSystemTools::ReplaceString(name, "dot", "dotdot");
-  cmSystemTools::ReplaceString(name, ".", "ldot");
+  cmSystemTools::ReplaceString(name, ".", "_");
   // '+' is not allowed in variable names, so escape them.
-  cmSystemTools::ReplaceString(name, "plus", "plusplus");
-  cmSystemTools::ReplaceString(name, "+", "lplus");
+  cmSystemTools::ReplaceString(name, "+", "_");
 }
 
 std::string
 cmNinjaTargetGenerator::OrderDependsTargetForTarget()
 {
-  return "cmake_order_depends_target_" + this->GetTargetName();
+  std::string targetName = this->GetTargetName();
+  EscapeTargetForVariable(targetName);
+  return targetName + "_orderdeps";
 }
 
 std::string
@@ -142,7 +142,7 @@ cmNinjaTargetGenerator::FlagVariableForTarget(std::string const& lang)
 {
   std::string targetName = this->GetTargetName();
   EscapeTargetForVariable(targetName);
-  return "cmake_flags_target_" + targetName + "_lang_" + lang;
+  return targetName + "_" + lang + "_flags";
 }
 
 std::string
@@ -150,7 +150,7 @@ cmNinjaTargetGenerator::DefineVariableForTarget(std::string const& lang)
 {
   std::string targetName = this->GetTargetName();
   EscapeTargetForVariable(targetName);
-  return "cmake_defines_target_" + targetName + "_lang_" + lang;
+  return targetName + "_" + lang + "_defines";
 }
 
 std::string
