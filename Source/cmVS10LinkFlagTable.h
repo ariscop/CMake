@@ -198,8 +198,10 @@ static cmVS7FlagTable cmVS10LinkFlagTable[] = {
   // String Properties
   { "OutputFile", "OUT:", "Output File", "", cmVS7FlagTable::UserValue },
   { "Version", "VERSION:", "Version", "", cmVS7FlagTable::UserValue },
+#if 0
   { "SpecifySectionAttributes", "SECTION:", "Specify Section Attributes", "",
     cmVS7FlagTable::UserValue },
+#endif
   { "MSDOSStubFileName", "STUB:", "MS-DOS Stub File Name", "",
     cmVS7FlagTable::UserValue },
   // Skip [TrackerLogDirectory] - no command line Switch.
@@ -234,8 +236,10 @@ static cmVS7FlagTable cmVS10LinkFlagTable[] = {
   { "BaseAddress", "BASE:", "Base Address", "", cmVS7FlagTable::UserValue },
   { "ImportLibrary", "IMPLIB:", "Import Library", "",
     cmVS7FlagTable::UserValue },
+#if 0
   { "MergeSections", "MERGE:", "Merge Sections", "",
     cmVS7FlagTable::UserValue },
+#endif
   { "LinkKeyFile", "KEYFILE:", "Key File", "", cmVS7FlagTable::UserValue },
   { "KeyContainer", "KEYCONTAINER:", "Key Container", "",
     cmVS7FlagTable::UserValue },
