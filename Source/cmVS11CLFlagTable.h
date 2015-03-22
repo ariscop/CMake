@@ -201,7 +201,7 @@ static cmVS7FlagTable cmVS11CLFlagTable[] = {
   { "PreprocessOutputPath", "Fi", "Preprocess Output Path", "",
     cmVS7FlagTable::UserValue },
   { "PrecompiledHeaderFile", "Yc", "Precompiled Header Name", "",
-    cmVS7FlagTable::UserValueRequired },
+    cmVS7FlagTable::UserValue },
   { "PrecompiledHeaderFile", "Yu", "Precompiled Header Name", "",
     cmVS7FlagTable::UserValueRequired },
   { "PrecompiledHeaderOutputFile", "Fp", "Precompiled Header Output File", "",
