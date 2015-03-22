@@ -957,6 +957,8 @@ void cmVisualStudio10TargetGenerator::WriteMSToolConfigurationValues(
       this->GlobalGenerator->TargetsWindowsStore() ||
       this->GeneratorTarget->GetPropertyAsBool("VS_WINRT_EXTENSIONS")) {
     this->WriteString("<CharacterSet>Unicode</CharacterSet>\n", 2);
+  } else this->WriteString("<CharacterSet>NotSet</CharacterSet>\n", 2);
+#if 0
   } else if (this->GeneratorTarget->GetType() <=
                cmStateEnums::MODULE_LIBRARY &&
              this->ClOptions[config]->UsingSBCS()) {
@@ -964,6 +966,7 @@ void cmVisualStudio10TargetGenerator::WriteMSToolConfigurationValues(
   } else {
     this->WriteString("<CharacterSet>MultiByte</CharacterSet>\n", 2);
   }
+#endif
   if (const char* toolset = gg->GetPlatformToolset()) {
     std::string pts = "<PlatformToolset>";
     pts += toolset;
@@ -2199,7 +2202,10 @@ bool cmVisualStudio10TargetGenerator::ComputeClOptions(
   if (this->MSTools) {
     if (vcxproj == this->ProjectType) {
       clOptions.FixExceptionHandlingDefault();
+      clOptions.AddFlag("RuntimeLibrary", "");
+#if 0
       clOptions.AddFlag("PrecompiledHeader", "NotUsing");
+#endif
       std::string asmLocation = configName + "/";
       clOptions.AddFlag("AssemblerListingLocation", asmLocation.c_str());
     }
@@ -2780,8 +2786,10 @@ bool cmVisualStudio10TargetGenerator::ComputeLinkOptions(
             linkOptions.AddFlag("EntryPointSymbol", "WinMainCRTStartup");
           }
         }
+#if 0
       } else {
         linkOptions.AddFlag("SubSystem", "Windows");
+#endif
       }
     } else {
       if (this->GlobalGenerator->TargetsWindowsCE()) {
@@ -2793,8 +2801,10 @@ bool cmVisualStudio10TargetGenerator::ComputeLinkOptions(
             linkOptions.AddFlag("EntryPointSymbol", "mainACRTStartup");
           }
         }
+#if 0
       } else {
         linkOptions.AddFlag("SubSystem", "Console");
+#endif
       };
     }
 
@@ -2813,13 +2823,17 @@ bool cmVisualStudio10TargetGenerator::ComputeLinkOptions(
     std::string pdb = this->GeneratorTarget->GetPDBDirectory(config.c_str());
     pdb += "/";
     pdb += targetNamePDB;
+#if 0
     std::string imLib =
       this->GeneratorTarget->GetDirectory(config.c_str(), true);
     imLib += "/";
     imLib += targetNameImport;
 
     linkOptions.AddFlag("ImportLibrary", imLib.c_str());
+#endif
     linkOptions.AddFlag("ProgramDataBaseFile", pdb.c_str());
+    linkOptions.AddFlag("RandomizedBaseAddress", "");
+    linkOptions.AddFlag("DataExecutionPrevention", "");
 
     // A Windows Runtime component uses internal .NET metadata,
     // so does not have an import library.
@@ -2951,6 +2965,7 @@ void cmVisualStudio10TargetGenerator::WriteLinkOptions(
   this->WriteString("<Link>\n", 2);
 
   linkOptions.OutputAdditionalOptions(*this->BuildFileStream, "      ", "");
+  linkOptions.AddFlag("EnableUAC", "");
   linkOptions.OutputFlagMap(*this->BuildFileStream, "      ");
 
   this->WriteString("</Link>\n", 2);
