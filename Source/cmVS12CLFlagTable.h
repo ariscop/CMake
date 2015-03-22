@@ -271,7 +271,7 @@ static cmVS7FlagTable cmVS12CLFlagTable[] =
    "", cmVS7FlagTable::UserValue},
   {"PrecompiledHeaderFile", "Yc",
    "Precompiled Header Name",
-   "", cmVS7FlagTable::UserValueRequired},
+   "", cmVS7FlagTable::UserValue},
   {"PrecompiledHeaderFile", "Yu",
    "Precompiled Header Name",
    "", cmVS7FlagTable::UserValueRequired},
