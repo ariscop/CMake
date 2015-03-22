@@ -235,9 +235,11 @@ static cmVS7FlagTable cmVS10LinkFlagTable[] =
   {"Version", "VERSION:",
    "Version",
    "", cmVS7FlagTable::UserValue},
+#if 0
   {"SpecifySectionAttributes", "SECTION:",
    "Specify Section Attributes",
    "", cmVS7FlagTable::UserValue},
+#endif
   {"MSDOSStubFileName", "STUB:",
    "MS-DOS Stub File Name",
    "", cmVS7FlagTable::UserValue},
@@ -288,9 +290,11 @@ static cmVS7FlagTable cmVS10LinkFlagTable[] =
   {"ImportLibrary", "IMPLIB:",
    "Import Library",
    "", cmVS7FlagTable::UserValue},
+#if 0
   {"MergeSections", "MERGE:",
    "Merge Sections",
    "", cmVS7FlagTable::UserValue},
+#endif
   {"LinkKeyFile", "KEYFILE:",
    "Key File",
    "", cmVS7FlagTable::UserValue},
