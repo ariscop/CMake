@@ -914,6 +914,16 @@ void cmVisualStudio10TargetGenerator::WriteProjectConfigurationValues()
       this->WriteNsightTegraConfigurationValues(*i);
     }
 
+    // ReactOS: empty default includes
+    if (this->Makefile->IsOn("CMAKE_CROSSCOMPILING"))
+    {
+        this->WriteString("<IncludePath />\n", 2);
+        this->WriteString("<ReferencePath />\n", 2);
+        this->WriteString("<LibraryPath />\n", 2);
+        this->WriteString("<LibraryWPath />\n", 2);
+        this->WriteString("<SourcePath />\n", 2);
+    }
+
     this->WriteString("</PropertyGroup>\n", 1);
   }
 }
